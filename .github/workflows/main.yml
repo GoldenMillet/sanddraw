@@ -1,6 +1,9 @@
 name: 打包前端项目
-
 on: push
+
+permissions:
+  contents: write
+
 jobs:
   npm-build:
     name: npm-build工作
@@ -12,6 +15,12 @@ jobs:
 
      - name: 安装npm
        run: npm install
-       
+
      - name: 打包项目
        run: npm run build
+
+     - name: 部署项目
+       uses: JamesIves/github-pages-deploy-action@v4
+       with:
+        branch: gh-pages
+        folder: build
